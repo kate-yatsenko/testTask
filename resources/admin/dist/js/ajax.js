@@ -47,5 +47,20 @@
             });
         });
 
+        var url4 = "/admin/users";
+        $('.delete-user').on('click', function () {
+            var id = $(this).val();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'DELETE',
+                url: url4 + '/' + id,
+                success: function () {
+                    $("#user" + id).remove();
+                }
+            });
+        });
+
     });
 })(jQuery);

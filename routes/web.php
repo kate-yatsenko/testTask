@@ -13,9 +13,23 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/profile', 'ProfileController@index');
+    Route::post('/profile', 'ProfileController@store');
+    Route::get('/logout', 'AuthController@logout');
+});
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/register', 'AuthController@registerForm');
+    Route::post('/register', 'AuthController@register');
+    Route::get('/login', 'AuthController@loginForm')->name('login');
+    Route::post('/login', 'AuthController@login');
+});
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
     Route::get('/', 'DashboardController@index')->name('home');
     Route::resource('/companies', 'CompaniesController');
     Route::resource('/subdivisions', 'SubdivisionsController');
     Route::resource('/workers', 'WorkersController');
+    Route::resource('/users', 'UsersController');
 });
