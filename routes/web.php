@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/show/{id}', 'HomeController@show');
+Route::get('/showWorkers/{id}','HomeController@showWorkers');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', 'ProfileController@index');

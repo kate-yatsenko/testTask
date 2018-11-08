@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Company;
+use App\Subdivision;
+use Response;
 
 class HomeController extends Controller
 {
@@ -11,4 +13,18 @@ class HomeController extends Controller
         $companies = Company::paginate(10);
         return view('pages.index', ['companies' => $companies]);
     }
+
+    public function  show($id){
+        $subdivisions = Company::find($id)->subdivisions;
+
+        return Response::json($subdivisions);
+    }
+
+    public function  showWorkers($id){
+        $workers = Subdivision::find($id)->workers;
+
+        return Response::json($workers);
+    }
+
 }
+

@@ -45,11 +45,13 @@ mix.copy('resources/admin/plugins/iCheck/minimal/blue.png', 'public/css');
 
 mix.styles([
     'resources/front/css/bootstrap.min.css',
-    'resources/front/css/lead.css'
+    'resources/front/css/lead.css',
+    'resources/admin/font-awesome/4.5.0/css/font-awesome.min.css'
 ],'public/css/front.css');
 
 mix.scripts([
     'resources/front/js/jquery-1.11.3.min.js',
     'resources/front/js/bootstrap.min.js',
-    'resources/front/js/jquery.stickit.min.js'
+    'resources/front/js/jquery.stickit.min.js',
+    'resources/front/js/ajax.js'
 ], 'public/js/front.js');

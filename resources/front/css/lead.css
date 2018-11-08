@@ -1,7 +1,57 @@
+@font-face {
+    font-family: "OSBold";
+    src: url('../fonts/OpenSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "OSSemiBold";
+    src: url('../fonts/OpenSans-SemiBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: "OSLight";
+    src: url('../fonts/OpenSans-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: "LatoBold";
+    src: url('../fonts/Lato-Bold.ttf') format('truetype');
+}
+
 .company-img img{
     width: 500px;
     height: 300px;
 }
 .navbar-brand {
     text-transform: uppercase;
+}
+.title {
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-family: OSBold;
+}
+.info{
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-family: OSSemiBold;
+}
+
+.text {
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-family: OSLight;
+}
+
+.company{
+    margin: 30px 0;
+}
+
+.subdiv, .workers{
+    display: none;
+}
+
+.imgWork{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
 }
