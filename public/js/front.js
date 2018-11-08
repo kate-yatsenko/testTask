@@ -54,13 +54,13 @@ function(){this.reset();this.spacer.remove();this.element.removeData("jquery-sti
                         for (i = 0; i < data.length; i++) {
                             $('#company' + company_id).find('.subdiv').append(
                                 `<div class="col" id="sub${data[i].id}">` +
-                                '<div class="card-body">' +
-                                '<h4 class="title">' + data[i].title + '</h4>' +
-                                '<p class="info">address: ' + data[i].address + '</p>' +
-                                '<p class="text">' + data[i].description + '</p>' +
-                                '</div>' +
+                                `<div class="card-body">` +
+                                `<h4 class="title">` + data[i].title + `</h4>` +
+                                `<p class="info">address: ` + data[i].address + `</p>` +
+                                `<p class="text">` + data[i].description + `</p>` +
+                                `</div>` +
                                 `<button value="${data[i].id}" class="getWorkers btn btn-info">See Workers<i class="fa fa-plus ml-3" id="plusWorkersToggle${data[i].id}"></button>` +
-                                '<div class="workers"></div></div>');
+                                `<div class="workers"><div class="work d-flex"></div></div></div>`);
                         }
                         $('#company' + company_id).find('.subdiv').slideToggle("slow", function () {
                         });
@@ -92,13 +92,14 @@ function(){this.reset();this.spacer.remove();this.element.removeData("jquery-sti
                     success: function (data) {
                         t.addClass('loaded');
                         for (i = 0; i < data.length; i++) {
-                            $('#sub' + sub_id).find('.workers').append(
+                            $('#sub' + sub_id).find('.work').append(
                                 '<div class="col-md-3">' +
-                                '<div class="card-body">' +
+                                '<div class="workers-body">' +
                                 '<h4 class="title">' + data[i].lastName + ' ' + data[i].firstName + ' ' + data[i].middleName + '</h4>' +
                                 '<p class="info">address: ' + data[i].address + '</p>' +
-                                `<img class="imgWork" src="/uploads/${data[i].image}">` +
-                                '</div>');
+                                '<p class="info">phone: ' + data[i].phone + '</p>' +
+                                '</div>' +
+                                `<img class="imgWork" src="/uploads/${data[i].image}">`);
                         }
                         $('#sub' + sub_id).find('.workers').slideToggle("slow", function () {
                         });

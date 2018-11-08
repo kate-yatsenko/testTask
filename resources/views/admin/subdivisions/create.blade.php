@@ -46,7 +46,6 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <button class="btn btn-default">Back</button>
                     <button class="btn btn-success pull-right">Add</button>
                 </div>
                 <!-- /.box-footer-->

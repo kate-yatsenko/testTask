@@ -10,7 +10,7 @@ use Response;
 class HomeController extends Controller
 {
     public function index(){
-        $companies = Company::paginate(10);
+        $companies = Company::paginate(5);
         return view('pages.index', ['companies' => $companies]);
     }
 
