@@ -6,7 +6,7 @@
             @foreach($companies as $company)
                     <div id="company{{$company->id}}" class="row company">
                         <div class="col-md-6">
-                            <div class="card-img-left company-img"><img src="{{$company->getImage()}}" alt=""></div>
+                            <div class="card-img-left company-img"><img class='img-fluid' src="{{$company->getImage()}}" alt=""></div>
                         </div>
                         <div class="col-md-6">
                             <div class="card-body">

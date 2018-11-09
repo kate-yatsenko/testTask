@@ -27,7 +27,7 @@
                                 `<p class="text">` + data[i].description + `</p>` +
                                 `</div>` +
                                 `<button value="${data[i].id}" class="getWorkers btn btn-info">See Workers<i class="fa fa-plus ml-3" id="plusWorkersToggle${data[i].id}"></button>` +
-                                `<div class="workers"><div class="work d-flex"></div></div></div>`);
+                                `<div class="workers"><div class="work d-md-flex"></div></div></div>`);
                         }
                         $('#company' + company_id).find('.subdiv').slideToggle("slow", function () {
                         });
