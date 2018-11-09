@@ -67,10 +67,11 @@
 }
 
 .imgWork {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
+    margin-top: 40px;
 }
 
 .workers-body {
@@ -87,6 +88,10 @@
 
 .jstree-themeicon{
     display: none!important;
+}
+
+.hov {
+    transition: .3s ease;
 }
 /*!
  *  Font Awesome 4.5.0 by @davegandy - http://fontawesome.io - @fontawesome

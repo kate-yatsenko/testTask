@@ -60,17 +60,16 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="/js/front.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="/js/front.js"></script>
 <script>
     $(function () {
 
         $('#jstree').jstree();
-        $('.getSub').on('click', function () {
-            console.log(1);
-        });
+
         $('.getInfoCompany').on({
             'mouseover': function () {
                 var company_id = $(this).val();
@@ -92,39 +91,64 @@
                     }
                 });
             },
-            'mouseout': function () {
+            'mouseleave': function () {
                 $('.information').find('.hov').remove();
             }
         });
+        $('.main-content').on('mouseover', '.getInfoSub', function () {
+            var sub_id = $(this).val();
+            var data = {
+                action: 'showSub'
+            };
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'GET',
+                url: '/showSub/' + sub_id,
+                data: data,
+                success: function (data) {
+                    $('.information').append(`<div class="hov">` +
+                        `<div class="card-body">` +
+                        `<h4 class="title">` + data.title + `</h4>` +
+                        `<p class="info">address: ` + data.address + `</p>` +
+                        `<p class="text">` + data.description + `</p>` +
+                        `</div></div> `);
+                }
+            });
+        });
 
+        $('.main-content').on('mouseleave', '.getInfoSub', function () {
+            $('.information').find('.hov').remove();
+        });
 
-        // 'mouseover': function () {
-        //     console.log(1);
-        //     var sub_id = $(this).val();
-        //     var data = {
-        //         action: 'showSub'
-        //     };
-        //     $.ajax({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         },
-        //         type: 'GET',
-        //         url: '/showSub/' + sub_id,
-        //         data: data,
-        //         success: function (data) {
-        //             $('.information').append(`<div class="hov">` +
-        //                 `<div class="card-body">` +
-        //                 `<h4 class="title">` + data.title + `</h4>` +
-        //                 `<p class="info">address: ` + data.address + `</p>` +
-        //                 `<p class="text">` + data.description + `</p>` +
-        //                 `</div></div> `);
-        //         }
-        //     });
-        // },
-        // 'mouseout': function () {
-        //     $('.information').find('.hov').remove();
-        // }
-        // });
+        $('.main-content').on('mouseover', '.getInfoWorkers', function () {
+            var work_id = $(this).val();
+            var data = {
+                action: 'showWorkers'
+            };
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'GET',
+                url: '/showWorkers/' + work_id,
+                data: data,
+                success: function (data) {
+                    $('.information').append(`<div class="hov d-md-flex">` +
+                        '<div class="col-12 col-md-8">' +
+                        '<div class="workers-body">' +
+                        '<h4 class="title">' + data.lastName + ' ' + data.firstName + ' ' + data.middleName + '</h4>' +
+                        '<p class="info">address: ' + data.address + '</p>' +
+                        '<p class="info">phone: ' + data.phone + '</p>' +
+                        '</div></div>' + '<div class="col-md-4">' +
+                        `<img class="imgWork img-responsive" src="/uploads/${data.image}"></div></div> `);
+                }
+            });
+        });
+        $('.main-content').on('mouseleave', '.getInfoWorkers', function () {
+            $('.information').find('.hov').remove();
+        });
     });
 
 

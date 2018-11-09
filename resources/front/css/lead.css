@@ -60,10 +60,11 @@
 }
 
 .imgWork {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
+    margin-top: 40px;
 }
 
 .workers-body {
