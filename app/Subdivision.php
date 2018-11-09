@@ -62,5 +62,4 @@ class Subdivision extends Model
     public function getCompanyId(){
         return $this->company!=null ? $this->company->id : null;
     }
-
 }

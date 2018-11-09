@@ -62,7 +62,7 @@ class Worker extends Model
     public function getImage()
     {
         if ($this->image == null) {
-            return '/img/no-image.png';
+            return '/uploads/no-image.png';
         }
         return '/uploads/' . $this->image;
 

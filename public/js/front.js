@@ -31,83 +31,105 @@ k||m<=this.options.screenMaxWidth)&&this.element.is(":visible")};c.prototype.loc
 break;case e.Absolute:a=c[0].getBoundingClientRect();d=a.top-this.baseTop;f=a.left-this.margin.left;0<=d?this.reset():(a=b.parent()[0].getBoundingClientRect(),a.bottom+this.baseParentOffset+this.offsetHeight>b.outerHeight(!1)+this.basePadding&&this.setFixed(f+r,a.bottom,-this.offsetHeight));break;default:a=b[0].getBoundingClientRect();d=a.top-this.baseTop;if(0<=d)break;c.height(b.height());c.show();f=a.left-this.margin.left;this.options.scope==l.Document?this.setFixed(f,a.bottom,0):b.parent()[0].getBoundingClientRect().bottom+
 this.baseParentOffset<=b.outerHeight(!1)+this.basePadding?this.setAbsolute(this.element.position().left):this.setFixed(f+r,a.bottom,0);c.width()||c.width(b.width())}else this.stick!=e.None&&this.reset()};c.prototype.resize=function(){this.bound();this.precalculate();if(this.stick!=e.None){var a=this.element,b=this.spacer;a.width(b.width());b.height(a.height());this.stick==e.Fixed&&(b=this.spacer[0].getBoundingClientRect().left-this.margin.left,a.css("left",b+"px"))}this.locate()};c.prototype.destroy=
 function(){this.reset();this.spacer.remove();this.element.removeData("jquery-stickit")};var p,m,v=["destroy"];b.fn.stickit=function(a,d){"string"==typeof a?-1!=b.inArray(a,v)&&this.each(function(){var c=b(this).data("jquery-stickit");c&&c[a].apply(c,d)}):(t||(t=!0,n(),b(h).ready(function(){b(g).bind("resize",n).bind("scroll",u)})),d=a,this.each(function(){var a=new c(this,d);b(this).data("jquery-stickit",a);a.locate()}));return this}})(jQuery,window,document);
-;(function ($, undefined) {
-    $(document).ready(function () {
-        $('.getSub').on('click', function () {
-            var that = $(this);
-            var company_id = $(this).val();
-            var data = {
-                action: 'show'
-            };
-
-            $('#plusSubToggle' + company_id).toggleClass('fa-plus').toggleClass('fa-minus');
-            if(!(that.hasClass('loaded'))) {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: 'GET',
-                    url: '/show/' + company_id,
-                    data: data,
-                    success: function (data) {
-                        that.addClass('loaded');
-                        for (i = 0; i < data.length; i++) {
-                            $('#company' + company_id).find('.subdiv').append(
-                                `<div class="col" id="sub${data[i].id}">` +
-                                `<div class="card-body">` +
-                                `<h4 class="title">` + data[i].title + `</h4>` +
-                                `<p class="info">address: ` + data[i].address + `</p>` +
-                                `<p class="text">` + data[i].description + `</p>` +
-                                `</div>` +
-                                `<button value="${data[i].id}" class="getWorkers btn btn-info">See Workers<i class="fa fa-plus ml-3" id="plusWorkersToggle${data[i].id}"></button>` +
-                                `<div class="workers"><div class="work d-md-flex"></div></div></div>`);
-                        }
-                        $('#company' + company_id).find('.subdiv').slideToggle("slow", function () {
-                        });
-                    }
-                });
-                return false;
-            } else {
-                $('#company' + company_id).find('.subdiv').slideToggle("slow");
-            }
-        });
-
-        $('.subdiv').on('click', '.getWorkers', function () {
-            console.log('1');
-            var t = $(this);
-            var sub_id = $(this).val();
-            var data = {
-                action: 'showWorkers'
-            };
-
-            $('#plusWorkersToggle' + sub_id).toggleClass('fa-plus').toggleClass('fa-minus');
-            if(!(t.hasClass('loaded'))) {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: 'GET',
-                    url: '/showWorkers/' + sub_id,
-                    data: data,
-                    success: function (data) {
-                        t.addClass('loaded');
-                        for (i = 0; i < data.length; i++) {
-                            $('#sub' + sub_id).find('.work').append(
-                                '<div class="col-md-3">' +
-                                '<div class="workers-body">' +
-                                '<h4 class="title">' + data[i].lastName + ' ' + data[i].firstName + ' ' + data[i].middleName + '</h4>' +
-                                '<p class="info">address: ' + data[i].address + '</p>' +
-                                '<p class="info">phone: ' + data[i].phone + '</p>' +
-                                '</div>' +
-                                `<img class="imgWork" src="/uploads/${data[i].image}">`);
-                        }
-                        $('#sub' + sub_id).find('.workers').slideToggle("slow", function () {
-                        });
-                    }
-                });
-            } else {
-                $('#sub' + sub_id).find('.workers').slideToggle("slow");
-            }
-        });
-    });
-})(jQuery);
+// ;(function ($, undefined) {
+//     $(document).ready(function () {
+//         $('.getInfoCompany').on('changed.jstree', function () {
+//             console.log('1');
+//             var that = $(this);
+//             var company_id = $(this).val();
+//             var data = {
+//                 action: 'showComp'
+//             };
+//             $.ajax({
+//                 headers: {
+//                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//                 },
+//                 type: 'GET',
+//                 url: '/showComp/' + company_id,
+//                 data: data,
+//                 success: function (data) {
+//                     $('.information').append(data);
+//                 }
+//             });
+//         });
+//
+//         // $('.getSub').on('click', function () {
+//         //     var that = $(this);
+//         //     var company_id = $(this).val();
+//         //     var data = {
+//         //         action: 'show'
+//         //     };
+//         //
+//         //     $('#plusSubToggle' + company_id).toggleClass('fa-plus').toggleClass('fa-minus');
+//         //     if(!(that.hasClass('loaded'))) {
+//         //         $.ajax({
+//         //             headers: {
+//         //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         //             },
+//         //             type: 'GET',
+//         //             url: '/show/' + company_id,
+//         //             data: data,
+//         //             success: function (data) {
+//         //                 that.addClass('loaded');
+//         //                 for (i = 0; i < data.length; i++) {
+//         //                     $('#company' + company_id).find('.subdiv').append(
+//         //                         `<div class="col" id="sub${data[i].id}">` +
+//         //                         `<div class="card-body">` +
+//         //                         `<h4 class="title">` + data[i].title + `</h4>` +
+//         //                         `<p class="info">address: ` + data[i].address + `</p>` +
+//         //                         `<p class="text">` + data[i].description + `</p>` +
+//         //                         `</div>` +
+//         //                         `<button value="${data[i].id}" class="getWorkers btn btn-info">See Workers<i class="fa fa-plus ml-3" id="plusWorkersToggle${data[i].id}"></button>` +
+//         //                         `<div class="workers"><div class="work d-md-flex"></div></div></div>`);
+//         //                 }
+//         //                 $('#company' + company_id).find('.subdiv').slideToggle("slow", function () {
+//         //                 });
+//         //             }
+//         //         });
+//         //         return false;
+//         //     } else {
+//         //         $('#company' + company_id).find('.subdiv').slideToggle("slow");
+//         //     }
+//         // });
+//         //
+//         // $('.subdiv').on('click', '.getWorkers', function () {
+//         //     console.log('1');
+//         //     var t = $(this);
+//         //     var sub_id = $(this).val();
+//         //     var data = {
+//         //         action: 'showWorkers'
+//         //     };
+//         //
+//         //     $('#plusWorkersToggle' + sub_id).toggleClass('fa-plus').toggleClass('fa-minus');
+//         //     if(!(t.hasClass('loaded'))) {
+//         //         $.ajax({
+//         //             headers: {
+//         //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         //             },
+//         //             type: 'GET',
+//         //             url: '/showWorkers/' + sub_id,
+//         //             data: data,
+//         //             success: function (data) {
+//         //                 t.addClass('loaded');
+//         //                 for (i = 0; i < data.length; i++) {
+//         //                     $('#sub' + sub_id).find('.work').append(
+//         //                         '<div class="col-md-3">' +
+//         //                         '<div class="workers-body">' +
+//         //                         '<h4 class="title">' + data[i].lastName + ' ' + data[i].firstName + ' ' + data[i].middleName + '</h4>' +
+//         //                         '<p class="info">address: ' + data[i].address + '</p>' +
+//         //                         '<p class="info">phone: ' + data[i].phone + '</p>' +
+//         //                         '</div>' +
+//         //                         `<img class="imgWork" src="/uploads/${data[i].image}">`);
+//         //                 }
+//         //                 $('#sub' + sub_id).find('.workers').slideToggle("slow", function () {
+//         //                 });
+//         //             }
+//         //         });
+//         //     } else {
+//         //         $('#sub' + sub_id).find('.workers').slideToggle("slow");
+//         //     }
+//         // });
+//
+//
+//     });
+// })(jQuery);

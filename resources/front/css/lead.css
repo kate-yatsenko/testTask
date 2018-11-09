@@ -70,3 +70,14 @@
     margin: 30px 0;
     font-family: 'LatoBold', sans-serif;
 }
+
+.none-button{
+    border: medium none;
+    background-image: none;
+    background: transparent;
+    background-color: transparent;
+}
+
+.jstree-themeicon{
+    display: none!important;
+}

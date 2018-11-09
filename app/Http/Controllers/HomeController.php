@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Worker;
 use Illuminate\Http\Request;
 use App\Company;
 use App\Subdivision;
@@ -10,20 +11,26 @@ use Response;
 class HomeController extends Controller
 {
     public function index(){
-        $companies = Company::paginate(5);
+        $companies = Company::all();
         return view('pages.index', ['companies' => $companies]);
     }
 
-    public function  show($id){
-        $subdivisions = Company::find($id)->subdivisions;
+    public function  showComp($id){
+        $company = Company::find($id);
 
-        return Response::json($subdivisions);
+        return Response::json($company);
+    }
+
+    public function  showSub($id){
+        $subdivision = Subdivision::find($id);
+
+        return Response::json($subdivision);
     }
 
     public function  showWorkers($id){
-        $workers = Subdivision::find($id)->workers;
+        $worker = Worker::find($id);
 
-        return Response::json($workers);
+        return Response::json($worker);
     }
 
 }

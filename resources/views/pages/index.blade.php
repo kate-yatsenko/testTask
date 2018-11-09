@@ -1,28 +1,38 @@
 @extends('pages.layout')
 
 @section('content')
-    <div class="main-content">
-        <div class="container">
-            @foreach($companies as $company)
-                    <div id="company{{$company->id}}" class="row company">
-                        <div class="col-md-6">
-                            <div class="card-img-left company-img"><img class='img-fluid' src="{{$company->getImage()}}" alt=""></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card-body">
-                                <h3 class="card-title">{{$company->title}}</h3>
-                                <h4 class="card-title">City: {{$company->city}}</h4>
-                                <p class="card-text">{{$company->description}}</p>
-                            </div>
-                            <button class="getSub btn btn-info" value="{{$company->id}}">See Subdivision<i id="plusSubToggle{{$company->id}}" class="fa fa-plus ml-3"></i>
-                            </button>
-                        </div>
-                        <div class="subdiv">
-                        </div>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="main-content" id="jstree">
+                <ul>
+                    @foreach($companies as $company)
+                        <li>
+                            <button class="none-button getInfoCompany" id="company{{$company->id}}"
+                                    value="{{$company->id}}">{{$company->title}}</button>
+                            <ul>
+                                @foreach($company->subdivisions as $sub)
+                                    <li>
+                                        <button class="none-button getInfoSub" id="sub{{$sub->id}}"
+                                                value="{{$sub->id}}">{{$sub->title}}</button>
+                                        <ul>
+                                            @foreach($sub->workers as $worker)
+                                                <li>
+                                                    <button class="none-button getInfoWorkers" id="worker{{$worker->id}}"
+                                                            value="{{$worker->id}}">{{$worker->firstName . ' ' . $worker->lastName}}</button>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
 
-            @endforeach
-            {{$companies->links()}}
+                </ul>
+            </div>
+            <div class="col-8">
+                <div class="information"></div>
+            </div>
         </div>
     </div>
 @endsection

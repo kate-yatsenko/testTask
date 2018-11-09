@@ -12,7 +12,8 @@
 */
 
 Route::get('/', 'HomeController@index');
-Route::get('/show/{id}', 'HomeController@show');
+Route::get('/showComp/{id}', 'HomeController@showComp');
+Route::get('/showSub/{id}', 'HomeController@showSub');
 Route::get('/showWorkers/{id}','HomeController@showWorkers');
 
 Route::group(['middleware' => 'auth'], function () {

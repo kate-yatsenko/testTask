@@ -77,6 +77,17 @@
     margin: 30px 0;
     font-family: 'LatoBold', sans-serif;
 }
+
+.none-button{
+    border: medium none;
+    background-image: none;
+    background: transparent;
+    background-color: transparent;
+}
+
+.jstree-themeicon{
+    display: none!important;
+}
 /*!
  *  Font Awesome 4.5.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
